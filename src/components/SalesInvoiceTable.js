@@ -49,7 +49,15 @@ const SalesInvoiceTable = () => {
     <div className="container">
       <div className="row row-cols-1 row-cols-lg-2">
         <div className="col">
-          <DataTable columns={columns} data={invoices} pagination />
+          <DataTable
+            title={"Sales"}
+            columns={columns}
+            data={invoices}
+            pagination
+            fixedHeader
+            fixedHeaderScrollHeight="500px"
+            selectableRows
+          />
         </div>
         <div className="col">
           <h1>Hi</h1>
