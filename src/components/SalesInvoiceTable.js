@@ -9,7 +9,7 @@ const SalesInvoiceTable = () => {
 
   const getInvoices = async () => {
     try {
-      const response = await axios.get("invoices.json");
+      const response = await axios.get("http://localhost:5000/invoices");
       setInvoices(response.data);
       setFilterInvoices(response.data);
     } catch (error) {
@@ -20,7 +20,7 @@ const SalesInvoiceTable = () => {
   const columns = [
     {
       name: "Invoice ID",
-      selector: (row) => row.id,
+      selector: (row) => row._id,
     },
     {
       name: "Date",
@@ -94,7 +94,38 @@ const SalesInvoiceTable = () => {
           />
         </div>
         <div className="col col-lg-4">
-          <h1>Hi</h1>
+          <div className="customer-form">
+            <h1>Create New Invoice</h1>
+            <form>
+              <label htmlFor="" className="mb-1">
+                Customer
+              </label>
+              <input
+                type="text"
+                name="customer_name"
+                placeholder="Enter Customer Name"
+                className="form-control mb-3"
+              />
+              <label htmlFor="" className="mb-1">
+                Payable Amount
+              </label>
+              <input
+                type="text"
+                name="payable_amount"
+                placeholder="Enter Payable Amount"
+                className="form-control mb-3"
+              />
+              <label htmlFor="" className="mb-1">
+                Paid Amount
+              </label>
+              <input
+                type="text"
+                name="paid_amount"
+                placeholder="Enter Paid Amount"
+                className="form-control mb-3"
+              />
+            </form>
+          </div>
         </div>
       </div>
     </div>
