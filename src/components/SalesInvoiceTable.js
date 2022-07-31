@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import "./SalesInvoiceTable.css";
 import moment from "moment";
+import { toast } from "react-toastify";
 
 const SalesInvoiceTable = () => {
   const [invoices, setInvoices] = useState([]);
@@ -16,7 +17,43 @@ const SalesInvoiceTable = () => {
     const payableAmount = event.target.payable_amount.value;
     const paidAmount = event.target.paid_amount.value;
     const dueAmount = parseInt(payableAmount) - parseInt(paidAmount);
-    console.log(date, customerName, payableAmount, paidAmount, dueAmount);
+
+    const invoice = {
+      date: date,
+      customer: customerName,
+      payableAmount: parseInt(payableAmount),
+      paidAmount: parseInt(paidAmount),
+      dueAmount: dueAmount,
+    };
+
+    fetch("http://localhost:5000/invoice", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(invoice),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        toast("Successfully Added");
+        event.target.customer_name.value = "";
+        event.target.payable_amount.value = "";
+        event.target.paid_amount.value = "";
+      });
+  };
+
+  const handleDeleteInvoice = (id) => {
+    fetch(`http://localhost:5000/invoices/${id}`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        toast("Successfully Deleted");
+      });
   };
 
   const getInvoices = async () => {
@@ -59,7 +96,7 @@ const SalesInvoiceTable = () => {
       cell: (row) => (
         <button
           className="btn btn-sm btn-primary"
-          onClick={() => alert(row.id)}
+          onClick={() => handleDeleteInvoice(row._id)}
         >
           Delete
         </button>
