@@ -215,6 +215,7 @@ const SalesInvoiceTable = () => {
                 Customer
               </label>
               <input
+                required
                 type="text"
                 name="customer_name"
                 placeholder="Enter Customer Name"
@@ -224,6 +225,7 @@ const SalesInvoiceTable = () => {
                 Payable Amount
               </label>
               <input
+                required
                 type="text"
                 name="payable_amount"
                 placeholder="Enter Payable Amount"
@@ -233,6 +235,7 @@ const SalesInvoiceTable = () => {
                 Paid Amount
               </label>
               <input
+                required
                 type="text"
                 name="paid_amount"
                 placeholder="Enter Paid Amount"
@@ -258,6 +261,7 @@ const SalesInvoiceTable = () => {
                   >
                     <Form.Label>Customer</Form.Label>
                     <Form.Control
+                      autoFocus
                       type="text"
                       defaultValue={singleinvoices.customer}
                       onChange={(e) => setUpdateCustomerName(e.target.value)}
@@ -269,6 +273,7 @@ const SalesInvoiceTable = () => {
                   >
                     <Form.Label>Payable Amount</Form.Label>
                     <Form.Control
+                      autoFocus
                       type="text"
                       defaultValue={singleinvoices.payableAmount}
                       onChange={(e) => setUpdatePayableAmount(e.target.value)}
@@ -280,6 +285,7 @@ const SalesInvoiceTable = () => {
                   >
                     <Form.Label>Paid Amount</Form.Label>
                     <Form.Control
+                      autoFocus
                       type="text"
                       defaultValue={singleinvoices.paidAmount}
                       onChange={(e) => setUpdatePaidAmount(e.target.value)}
