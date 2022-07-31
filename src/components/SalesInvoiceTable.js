@@ -53,6 +53,7 @@ const SalesInvoiceTable = () => {
       .then((data) => {
         console.log(data);
         toast("Successfully Deleted");
+        getInvoices();
       });
   };
 
@@ -95,12 +96,15 @@ const SalesInvoiceTable = () => {
       name: "Action",
       cell: (row) => (
         <button
-          className="btn btn-sm btn-primary"
+          className="btn btn-sm btn-danger"
           onClick={() => handleDeleteInvoice(row._id)}
         >
           Delete
         </button>
       ),
+    },
+    {
+      cell: (row) => <button className="btn btn-sm btn-info">Edit</button>,
     },
   ];
 
@@ -135,7 +139,7 @@ const SalesInvoiceTable = () => {
               <input
                 type="text"
                 placeholder="Search"
-                className="w-50 form-control"
+                className="w-100 w-lg-50 form-control"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
