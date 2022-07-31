@@ -1,9 +1,21 @@
+#searchInput {
+  width: 50%;
+  margin-bottom: 20px;
+}
+
 input[type="text"],
 input[type="submit"] {
   padding: 10px 12px;
 }
 
 input[type="text"]:focus,
-input[type="submit"]:focus {
+input[type="submit"]:focus,
+button:active {
   box-shadow: none;
+}
+
+@media screen and (max-width: 668px) {
+  #searchInput {
+    width: 100%;
+  }
 }
