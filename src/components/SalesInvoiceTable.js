@@ -88,9 +88,10 @@ const SalesInvoiceTable = () => {
 
   const handleUpdateInvoice = (id) => {
     let item = {
-      updateCustomerName,
-      updatePayableAmount,
-      updatePaidAmount,
+      customer: updateCustomerName,
+      payableAmount: parseInt(updatePayableAmount),
+      paidAmount: parseInt(updatePaidAmount),
+      dueAmount: parseInt(updatePayableAmount) - parseInt(updatePaidAmount),
     };
     console.log(item);
     fetch(`http://localhost:5000/invoices/${id}`, {
