@@ -1,0 +1,9 @@
+input[type="text"],
+input[type="submit"] {
+  padding: 10px 12px;
+}
+
+input[type="text"]:focus,
+input[type="submit"]:focus {
+  box-shadow: none;
+}

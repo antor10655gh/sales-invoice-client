@@ -1,11 +1,23 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
+import "./SalesInvoiceTable.css";
+import moment from "moment";
 
 const SalesInvoiceTable = () => {
   const [invoices, setInvoices] = useState([]);
   const [search, setSearch] = useState("");
   const [filterInvoices, setFilterInvoices] = useState([]);
+
+  const handleInvoice = (event) => {
+    event.preventDefault();
+    const date = moment().format("L");
+    const customerName = event.target.customer_name.value;
+    const payableAmount = event.target.payable_amount.value;
+    const paidAmount = event.target.paid_amount.value;
+    const dueAmount = parseInt(payableAmount) - parseInt(paidAmount);
+    console.log(date, customerName, payableAmount, paidAmount, dueAmount);
+  };
 
   const getInvoices = async () => {
     try {
@@ -72,7 +84,7 @@ const SalesInvoiceTable = () => {
       <div className="row row-cols-1">
         <div className="col col-lg-8">
           <DataTable
-            title={<h1>Sales</h1>}
+            title={<h1 style={{ color: "#5901FF" }}>Sales</h1>}
             columns={columns}
             data={filterInvoices}
             pagination
@@ -95,9 +107,9 @@ const SalesInvoiceTable = () => {
         </div>
         <div className="col col-lg-4">
           <div className="customer-form">
-            <h1>Create New Invoice</h1>
-            <form>
-              <label htmlFor="" className="mb-1">
+            <h1 className="pt-5">Create New Invoice</h1>
+            <form onSubmit={handleInvoice} className="mt-4">
+              <label htmlFor="" className="mb-1 fw-bold">
                 Customer
               </label>
               <input
@@ -106,7 +118,7 @@ const SalesInvoiceTable = () => {
                 placeholder="Enter Customer Name"
                 className="form-control mb-3"
               />
-              <label htmlFor="" className="mb-1">
+              <label htmlFor="" className="mb-1 fw-bold">
                 Payable Amount
               </label>
               <input
@@ -115,7 +127,7 @@ const SalesInvoiceTable = () => {
                 placeholder="Enter Payable Amount"
                 className="form-control mb-3"
               />
-              <label htmlFor="" className="mb-1">
+              <label htmlFor="" className="mb-1 fw-bold">
                 Paid Amount
               </label>
               <input
@@ -123,6 +135,13 @@ const SalesInvoiceTable = () => {
                 name="paid_amount"
                 placeholder="Enter Paid Amount"
                 className="form-control mb-3"
+              />
+              <input
+                type="submit"
+                name="submit"
+                value="SAVE"
+                className="form-control mb-3"
+                style={{ color: "#fff", background: "#3DCF4F" }}
               />
             </form>
           </div>
